@@ -10,7 +10,7 @@ export function viviani(a=1) {
   const cw=[1,1,4/3,2,4,2,4/3,1,1,1,4/3,2,4,2,4/3,1,1];
   const cp=[[1,0],[1,Math.sqrt(3)],[-.5,Math.sqrt(3)/2],[-2,0],[-.5,-Math.sqrt(3)/2],[1,-Math.sqrt(3)],[1,0]];
   const pw=[1,.5,1,.5,1,.5,1];
-  return {name:'Viviani surface',description:'球面と円柱面の交差から得られる4次元Viviani曲面。論文の厳密なテンソル積NURBS表現です。',degreeU:4,degreeV:2,knotsU:[0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4],knotsV:[0,0,0,1,1,2,2,3,3,3],controlPoints:c.map(([x,r,w])=>cp.map(([cy,cz])=>[x,cy*r,cz*r,w])),weights:cw.map(x=>pw.map(y=>x*y))};
+  return {name:'Viviani surface',domainU:[0,2],fullDomainU:[0,4],degreeU:4,degreeV:2,knotsU:[0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4],knotsV:[0,0,0,1,1,2,2,3,3,3],controlPoints:c.map(([x,r,w])=>cp.map(([cy,cz])=>[x,cy*r,cz*r,w])),weights:cw.map(x=>pw.map(y=>x*y))};
 }
 
 export function clifford() {

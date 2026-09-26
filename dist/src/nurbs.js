@@ -30,8 +30,8 @@ export function validateSurface(s) {
 export function sampleSurface(surface, uSteps, vSteps) {
   validateSurface(surface);
   const nu = surface.controlPoints.length, nv = surface.controlPoints[0].length;
-  const u0 = surface.knotsU[surface.degreeU], u1 = surface.knotsU[nu];
-  const v0 = surface.knotsV[surface.degreeV], v1 = surface.knotsV[nv];
+  const [u0,u1] = surface.domainU || [surface.knotsU[surface.degreeU], surface.knotsU[nu]];
+  const [v0,v1] = surface.domainV || [surface.knotsV[surface.degreeV], surface.knotsV[nv]];
   const points = new Float32Array(uSteps * vSteps * 4);
   const uv = new Float32Array(uSteps * vSteps * 2);
   for (let a = 0; a < uSteps; a++) {
