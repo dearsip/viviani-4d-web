@@ -1,4 +1,6 @@
 .field.compact { margin: 14px 0 0; }
-.panel-brand { padding-bottom: 16px; }
+.panel-brand { padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.panel-head { padding: 16px 0 0; border-bottom: 0; }
+.range-field.disabled { opacity: .35; pointer-events: none; }
 .panel-brand .eyebrow { font-size: 9px; letter-spacing: .17em; }
 .panel-brand h1 { max-width: none; margin-top: 5px; font-size: 19px; line-height: 1.15; letter-spacing: -.025em; }
