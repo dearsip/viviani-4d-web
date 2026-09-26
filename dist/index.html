@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071018">
+  <meta name="description" content="4次元NURBS曲面を回転・投影して観察できるWebGLビューア">
+  <title>Viviani 4D — NURBS Surface Viewer</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071018'/%3E%3Cpath d='M12 18c12 0 11 28 22 28s9-28 18-28M12 46c12 0 11-28 22-28s9 28 18 28' fill='none' stroke='%235eead4' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js"}}</script>
+</head>
+<body>
+  <main class="app" id="app">
+    <section class="stage" aria-label="4次元NURBS曲面ビューア">
+      <canvas id="viewer" aria-label="投影された4次元曲面"></canvas>
+      <header class="brand">
+        <span class="eyebrow">R⁴ / NURBS OBSERVATORY</span>
+        <h1>Viviani 4D</h1>
+      </header>
+      <div class="axis-key" aria-hidden="true"><i class="x"></i>X <i class="y"></i>Y <i class="z"></i>Z <i class="w"></i>W</div>
+      <div class="hud">
+        <span id="modelBadge">VIVIANI SURFACE</span>
+        <span id="meshStats">—</span>
+        <span id="fps">— FPS</span>
+      </div>
+      <p class="gesture">左ドラッグ: 3D回転 <b>·</b> 右ドラッグ / 2本指: 4D回転 <b>·</b> ホイール: ズーム</p>
+      <button class="panel-toggle" id="panelToggle" aria-label="設定パネルを開閉" aria-expanded="true">›</button>
+    </section>
+
+    <aside class="panel" id="panel">
+      <section class="panel-head">
+        <div><span class="section-no">01</span><h2>Surface</h2></div>
+        <p id="surfaceNote">球面と円柱面の交差から得られる4次元Viviani曲面。論文の厳密なテンソル積NURBS表現です。</p>
+      </section>
+
+      <label class="field"><span>プリセット</span>
+        <select id="preset">
+          <option value="viviani">Viviani surface</option>
+          <option value="clifford">Clifford torus</option>
+          <option value="ribbon">4D spline ribbon</option>
+        </select>
+      </label>
+
+      <div class="metric-row">
+        <div><small>次数</small><strong id="degreeMetric">4 × 2</strong></div>
+        <div><small>制御点</small><strong id="controlMetric">119</strong></div>
+        <div><small>サンプル</small><strong id="sampleMetric">—</strong></div>
+      </div>
+
+      <section class="group">
+        <div class="group-title"><span class="section-no">02</span><h2>Projection</h2></div>
+        <div class="segmented" role="group" aria-label="4次元投影方式">
+          <button id="orthoBtn" class="active" type="button">直交</button>
+          <button id="perspBtn" type="button">透視</button>
+        </div>
+        <label class="range-field" id="fovWrap"><span>4D 視野角 <output id="fovOut">54°</output></span><input id="fov4" type="range" min="10" max="115" value="54"></label>
+        <label class="range-field"><span>ズーム <output id="zoomOut">1.00×</output></span><input id="zoom" type="range" min="0.55" max="2.6" step="0.01" value="1"></label>
+      </section>
+
+      <section class="group">
+        <div class="group-title"><span class="section-no">03</span><h2>Rendering</h2></div>
+        <label class="range-field"><span>解像度 <output id="resolutionOut">96 × 48</output></span><input id="resolution" type="range" min="24" max="160" step="8" value="96"></label>
+        <div class="switch-row"><span>ワイヤーフレーム</span><input id="wireframe" type="checkbox" role="switch"></div>
+        <div class="switch-row"><span>制御点網</span><input id="controlNet" type="checkbox" role="switch"></div>
+        <div class="switch-row"><span>自動4D回転</span><input id="autoRotate" type="checkbox" role="switch" checked></div>
+      </section>
+
+      <section class="group">
+        <div class="group-title"><span class="section-no">04</span><h2>Data</h2></div>
+        <label class="file-button">ローカル JSON を開く<input id="fileInput" type="file" accept="application/json,.json"></label>
+        <div class="url-row"><input id="urlInput" type="url" placeholder="https://…/surface.json" aria-label="NURBS JSON URL"><button id="loadUrl" type="button">読込</button></div>
+        <button id="downloadSample" class="text-button" type="button">現在のNURBSデータを書き出す ↓</button>
+        <p class="format-note">形式: degreeU/V, knotsU/V, controlPoints[u][v][x,y,z,w], weights[u][v]</p>
+      </section>
+
+      <div class="actions"><button id="reset" type="button">姿勢をリセット</button><button id="copyLink" type="button">表示URLをコピー</button></div>
+      <p id="status" class="status" aria-live="polite">Ready.</p>
+      <footer><a href="https://doi.org/10.1016/j.softx.2026.102720" target="_blank" rel="noreferrer">Viviani4D paper ↗</a><a href="https://github.com/dearsip/CRF-Polychoron-Viewer" target="_blank" rel="noreferrer">Projection reference ↗</a></footer>
+    </aside>
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
