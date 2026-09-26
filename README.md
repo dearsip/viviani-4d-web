@@ -1,17 +1,21 @@
-# Viviani 4D NURBS Viewer
+# Viviani4D Web Implementation
 
-WebGL viewer for tensor-product NURBS surfaces embedded in R⁴. The default model is the exact degree-(4,2) NURBS representation of the four-dimensional Viviani surface described in the Viviani4D paper.
+Interactive WebGL viewer for four-dimensional NURBS surfaces.
 
-Open `dist/index.html` through a local HTTP server. Custom surfaces can be loaded as JSON with `degreeU`, `degreeV`, `knotsU`, `knotsV`, `controlPoints[u][v][4]`, and `weights[u][v]`.
+## Run locally
 
-## Controls
+```sh
+python -m http.server 8080 --directory dist
+```
 
-- Left drag: rotation within the visible XYZ subspace
-- Right drag: rotation through the fourth dimension
-- Wheel: zoom
+Then open <http://localhost:8080>.
 
-## References
+## GitHub Pages
 
-- [Viviani4D paper](https://doi.org/10.1016/j.softx.2026.102720)
-- [Reproducible notebook](https://zenodo.org/records/15514237)
-- [CRF Polychoron Viewer](https://github.com/dearsip/CRF-Polychoron-Viewer)
+Pushing `main` deploys the contents of `dist/` with GitHub Actions. Configure the repository's Pages source as **GitHub Actions** if it is not selected automatically.
+
+Expected URL: <https://dearsip.github.io/viviani-4d-web/>
+
+## Custom data
+
+Load a JSON file containing `degreeU`, `degreeV`, `knotsU`, `knotsV`, `controlPoints[u][v][x,y,z,w]`, and `weights[u][v]`.

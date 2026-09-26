@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#071018">
-  <meta name="description" content="4次元NURBS曲面を回転・投影して観察できるWebGLビューア">
+  <meta name="description" content="Interactive WebGL viewer for four-dimensional NURBS surfaces">
   <title>Viviani4D Web Implementation</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071018'/%3E%3Cpath d='M12 18c12 0 11 28 22 28s9-28 18-28M12 46c12 0 11-28 22-28s9 28 18 28' fill='none' stroke='%235eead4' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="./style.css">
@@ -13,12 +13,8 @@
 </head>
 <body>
   <main class="app" id="app">
-    <section class="stage" aria-label="4次元NURBS曲面ビューア">
-      <canvas id="viewer" aria-label="投影された4次元曲面"></canvas>
-      <header class="brand">
-        <span class="eyebrow">R⁴ / NURBS SURFACE VIEWER</span>
-        <h1>Viviani4D Web Implementation</h1>
-      </header>
+	    <section class="stage" aria-label="4D NURBS surface viewer">
+	      <canvas id="viewer" aria-label="Projected four-dimensional surface"></canvas>
       <div class="axis-key" aria-hidden="true"><i class="x"></i>X <i class="y"></i>Y <i class="z"></i>Z <i class="w"></i>W</div>
       <div class="hud">
         <span id="modelBadge">VIVIANI SURFACE</span>
@@ -26,11 +22,15 @@
         <span id="fps">— FPS</span>
       </div>
       <p class="gesture">Left drag: 3D rotate <b>·</b> Right drag / two fingers: 4D rotate <b>·</b> Wheel: zoom</p>
-      <button class="panel-toggle" id="panelToggle" aria-label="設定パネルを開閉" aria-expanded="true">›</button>
+	      <button class="panel-toggle" id="panelToggle" aria-label="Toggle settings panel" aria-expanded="true">›</button>
     </section>
 
-    <aside class="panel" id="panel">
-      <section class="panel-head">
+	    <aside class="panel" id="panel">
+	      <header class="panel-brand">
+	        <span class="eyebrow">R⁴ / NURBS SURFACE VIEWER</span>
+	        <h1>Viviani4D Web Implementation</h1>
+	      </header>
+	      <section class="panel-head">
         <div><span class="section-no">01</span><h2>Surface</h2></div>
       </section>
 
@@ -62,8 +62,7 @@
       <section class="group">
         <div class="group-title"><span class="section-no">03</span><h2>Rendering</h2></div>
         <label class="range-field"><span>Resolution <output id="resolutionOut">96 × 48</output></span><input id="resolution" type="range" min="32" max="320" step="16" value="96"></label>
-        <div class="switch-row" id="showBothRow"><span>Full two-lobe surface</span><input id="showBoth" type="checkbox" role="switch"></div>
-        <div class="switch-row"><span>Wireframe</span><input id="wireframe" type="checkbox" role="switch"></div>
+	        <div class="switch-row"><span>Wireframe</span><input id="wireframe" type="checkbox" role="switch"></div>
         <div class="switch-row"><span>Control net</span><input id="controlNet" type="checkbox" role="switch"></div>
         <div class="switch-row"><span>Automatic 4D rotation</span><input id="autoRotate" type="checkbox" role="switch" checked></div>
       </section>
@@ -78,7 +77,7 @@
 
       <div class="actions"><button id="reset" type="button">Reset view</button><button id="copyLink" type="button">Copy view URL</button></div>
       <p id="status" class="status" aria-live="polite">Ready.</p>
-      <footer><a href="https://doi.org/10.1016/j.softx.2026.102720" target="_blank" rel="noreferrer">Viviani4D paper ↗</a><a href="https://github.com/dearsip/CRF-Polychoron-Viewer" target="_blank" rel="noreferrer">Projection reference ↗</a></footer>
+	      <footer><a href="https://github.com/dearsip/viviani-4d-web" target="_blank" rel="noreferrer">GitHub repository ↗</a><a href="https://github.com/dearsip/CRF-Polychoron-Viewer" target="_blank" rel="noreferrer">Projection reference ↗</a></footer>
     </aside>
   </main>
   <script type="module" src="./src/main.js"></script>
