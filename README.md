@@ -9,6 +9,7 @@ Interactive WebGL viewer for four-dimensional NURBS surfaces.
 - Interactive rotation in visible space and through the fourth dimension
 - Side-by-side and cross-eyed stereoscopic views with adjustable eye spacing
 - Adjustable tessellation, wireframe, and control-net display
+- Color-coded X/Y/Z/W axes that follow the active 4D rotation and projection
 - JSON import and export
 - Viviani surface, Clifford torus, and 4D spline ribbon presets
 
@@ -19,6 +20,7 @@ Interactive WebGL viewer for four-dimensional NURBS surfaces.
 - **Mouse wheel or Zoom slider:** zoom the view
 - **Stereoscopic view:** select side-by-side or cross-eyed viewing
 - **Eye spacing:** adjust stereo separation independently of zoom
+- **4D coordinate axes:** show or hide the color-coded coordinate axes
 - **Reset view:** restore the initial rotation and zoom
 - **Copy view URL:** copy a link containing the current preset, projection, stereo mode, and eye spacing
 
